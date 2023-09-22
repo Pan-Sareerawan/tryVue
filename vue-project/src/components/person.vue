@@ -2,14 +2,17 @@
   <li>
     <h2>Name: {{ Name }} Lastname: {{ Lastname }}</h2>
 
-    <button @click="showDescription(id)">รายละเอียด</button>&nbsp; <!--ส่ง id ไปโดยใช้event @click="เรียกเมททอด"-->
+    <button @click="showDescription(id)">รายละเอียด</button>&nbsp;
+    <!--ส่ง id ไปโดยใช้event @click="เรียกเมททอด"-->
     <button @click="deketeEmployee(id)">ลบข้อมูล</button>
     <!-- <button @click="increase(10)">เพิ่ม</button>
       <button @click="decrease(20)">ลด</button>-->
-    <div v-show="isVisible">
-      <!--v-show ใช้ ซ่อนหรือแสดง-->
-      <p>Salary: {{ Salary }}</p>
-    </div>
+    <transition name="fade">
+      <div v-show="isVisible">
+        <!--v-show ใช้ ซ่อนหรือแสดง-->
+        <p>Salary: {{ Salary }}</p>
+      </div>
+    </transition>
   </li>
 </template>
 
@@ -20,7 +23,7 @@ export default {
   props: {
     //แบบที่มีการตรวจสอบprops
     id: {
-      type: Number
+      type: Number,
     },
     Name: {
       type: String, //ใส่แค่ตัวหนังสือ
@@ -31,23 +34,23 @@ export default {
       required: true,
     },
     Salary: {
-      type: Number
+      type: Number,
     },
     isVisible: {
       type: Boolean,
     },
   },
   methods: {
-    showDescription(id){
-       // console.log(id);
-        //ประกาศให้แม่ทราบว่าจะส่งข้อมูลไป this.$emit("ตั้งชื่ออีเว้น",ช้อมูลที่ส่งไป)
-        this.$emit("show",id);
+    showDescription(id) {
+      // console.log(id);
+      //ประกาศให้แม่ทราบว่าจะส่งข้อมูลไป this.$emit("ตั้งชื่ออีเว้น",ช้อมูลที่ส่งไป)
+      this.$emit("show", id);
     },
-    deketeEmployee(id){
-          //console.log(id);
-           this.$emit("delete",id);
+    deketeEmployee(id) {
+      //console.log(id);
+      this.$emit("delete", id);
     },
-   /* increase(value){
+    /* increase(value){
         // this.Salary+=value
         this.$emit("increase",id);
     },
@@ -70,7 +73,7 @@ h1 {
 h2 {
   color: brown;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  margin:3rem 0 1rem 0;
+  margin: 3rem 0 1rem 0;
   border-radius: 10px;
   padding: 10px;
   background-color: rgb(24, 33, 6);
@@ -82,6 +85,12 @@ button {
   border: 0px;
   border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
- 
+}
+
+.fade-enter-form{
+  opacity: 0; 
+}
+.fade-enter-active{
+  transition: all 0.5s linear;
 }
 </style>
