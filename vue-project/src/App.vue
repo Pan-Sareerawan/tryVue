@@ -1,7 +1,7 @@
 <template>
    <div>
   <header>
-     <h1>Employees Name</h1>
+     <h1>{{ $t('nameE') }}</h1>
      </header>
      <!--<dataEmployee :employees="employees"/>--> <!-- :employees="employees" v-bild:name = "nameprops" เพื่อเชื่อมไปหน้าลูกซึ่งก็คือ dataEmployee.vue-->
       <dataEmployee />
